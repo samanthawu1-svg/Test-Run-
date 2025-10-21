@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To‑Do</title>
+<style>
+:root{--bg:#0f172a;--card:#111827;--accent:#60a5fa;--text:#e5e7eb;--muted:#9ca3af;--danger:#f87171;}
+*{box-sizing:border-box}body{margin:0;font:16px/1.4 system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(135deg,#0f172a,#1f2937);color:var(--text);} 
+.app{max-width:620px;margin:8vh auto;padding:24px;background:var(--card);border-radius:14px;box-shadow:0 10px 35px rgba(0,0,0,.35)}
+h1{margin:0 0 16px;font-size:24px;letter-spacing:.3px}
+.row{display:flex;gap:10px}
+input[type=text]{flex:1;padding:12px 14px;border:1px solid #374151;background:#0b1220;color:var(--text);border-radius:10px;outline:none}
+input[type=text]::placeholder{color:var(--muted)}
+button.add{padding:12px 16px;background:var(--accent);border:0;color:#071426;border-radius:10px;font-weight:600;cursor:pointer}
+ul{list-style:none;margin:18px 0 0;padding:0}
+li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #1f2a44;background:#0b1220;border-radius:10px;margin-top:10px}
+li.done span{color:var(--muted);text-decoration:line-through}
+.text{flex:1;word-break:break-word}
+.del{background:var(--danger);border:0;color:#2b0b0b;border-radius:8px;padding:8px 10px;cursor:pointer}
+.empty{color:var(--muted);text-align:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="app">
+<h1>To‑Do List</h1>
+<div class="row"><input id="task" type="text" placeholder="Add a new task..."><button class="add" id="addBtn">Add</button></div>
+<ul id="list"></ul>
+<div class="empty" id="empty">No tasks yet. Add one!</div>
+</div>
+<script>
+const input=document.getElementById('task'),btn=document.getElementById('addBtn'),list=document.getElementById('list'),empty=document.getElementById('empty');
+const updateEmpty=()=>empty.style.display=list.children.length?'none':'block';
+function createItem(text){const li=document.createElement('li');const cb=document.createElement('input');cb.type='checkbox';const span=document.createElement('span');span.className='text';span.textContent=text;const del=document.createElement('button');del.textContent='Delete';del.className='del';cb.addEventListener('change',()=>{li.classList.toggle('done',cb.checked)});del.addEventListener('click',()=>{li.remove();updateEmpty()});li.append(cb,span,del);return li}
+function addTask(){const txt=input.value.trim();if(!txt){input.focus();return}list.prepend(createItem(txt));input.value='';updateEmpty()}
+btn.addEventListener('click',addTask);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')addTask()});
+updateEmpty();
+</script>
+</body>
+</html>
