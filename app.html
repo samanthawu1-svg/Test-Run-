@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Button Counter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>body{font-family:sans-serif;padding:2rem}button{font-size:1rem;padding:.5rem 1rem}</style>
+</head>
+<body>
+  <button id="btn">Clicked 0 times</button>
+  <script>
+    (function(){
+      let count=0;
+      const btn=document.getElementById('btn');
+      btn.addEventListener('click',()=>{count++;btn.textContent=`Clicked ${count} ${count===1?'time':'times'}`;});
+    })();
+  </script>
+</body>
+</html>
