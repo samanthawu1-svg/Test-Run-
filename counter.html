@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Counter</title>
+</head>
+<body>
+  <button id="btn">Click Me</button> <span id="count">0</span>
+  <script>
+    let clickCount=0;
+    const btn=document.getElementById('btn');
+    const countEl=document.getElementById('count');
+    btn.addEventListener('click',()=>{ countEl.textContent=String(++clickCount); });
+  </script>
+</body>
+</html>
